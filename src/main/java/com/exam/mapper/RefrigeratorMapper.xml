@@ -3,54 +3,53 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exam.mapper.RefrigeratorMapper">
-   
-    
-    <select id="getRefrigeratorStock" resultType="int">
-       select rStock from refrigerator
-       where userid = #{userid} AND gCode = #{gCode}
-    </select>
-    
-    <!-- 여기 수정 -->
-    <update id="updateRefrigeratorStock" parameterType="RefrigeratorDTO">
+
+	<select id="getRefrigeratorStock" resultType="int">
+		select rStock from refrigerator
+		where userid = #{userid} AND gCode = #{gCode}
+	</select>
+
+	<update id="updateRefrigeratorStock" parameterType="RefrigeratorDTO">
 		update refrigerator
 		set rStock = #{rStock}
 		where userid = #{userid} AND num = #{num}
-    </update>
-    
-    <insert id="refrigeratorAdd" parameterType="RefrigeratorDTO">
-      insert into refrigerator (userid, gCode, gCategory, gName, rStock)
-      values (#{userid}, #{gCode}, #{gCategory}, #{gName}, #{rStock})
-    </insert>
-    
-    <resultMap id="refrigeratorResultMap" type="RefrigeratorDTO">
-       <id     property="num" column="num" />
-       <result property="userid" column="userid"/>
-       <result property="gCode" column="gCode"/>
-       <result property="gCategory" column="gCategory"/>
-       <result property="gName" column="gName"/>
-       <result property="rStock" column="rStock"/>
-        
-        <!--  GoodsDTO 데이터 저장 -->
-        <collection property="goodsList" ofType="GoodsDTO">
-          <id     property="gCode" column="gCode" />
-          <result property="gCategory" column="gCategory"/>
-          <result property="gName" column="gName"/>
-          <result property="gContent" column="gContent"/>
-          <result property="gPrice" column="gPrice"/>
-          <result property="gImage" column="gImage"/>
-         </collection>
-    </resultMap>
-    
-    <select id="refrigeratorList" resultMap="refrigeratorResultMap" parameterType="string">
-       select *
-      from refrigerator join goods on refrigerator.gCode = goods.gCode
-      where userid = #{userid}
-       order by num
-    </select>
-    
-    <delete id="refrigeratorDelete" parameterType="int">
-       delete from refrigerator
-      where num = #{num}
-    </delete>
-    
+	</update>
+
+	<insert id="refrigeratorAdd" parameterType="RefrigeratorDTO">
+		insert into refrigerator (userid, gCode, gCategory, gName, rStock)
+		values (#{userid}, #{gCode}, #{gCategory}, #{gName}, #{rStock})
+	</insert>
+
+	<resultMap id="refrigeratorResultMap" type="RefrigeratorDTO">
+		<id property="num" column="num" />
+		<result property="userid" column="userid" />
+		<result property="gCode" column="gCode" />
+		<result property="gCategory" column="gCategory" />
+		<result property="gName" column="gName" />
+		<result property="rStock" column="rStock" />
+
+		<!-- GoodsDTO 데이터 저장 -->
+		<collection property="goodsList" ofType="GoodsDTO">
+			<id property="gCode" column="gCode" />
+			<result property="gCategory" column="gCategory" />
+			<result property="gName" column="gName" />
+			<result property="gContent" column="gContent" />
+			<result property="gPrice" column="gPrice" />
+			<result property="gImage" column="gImage" />
+		</collection>
+	</resultMap>
+
+	<select id="refrigeratorList" resultMap="refrigeratorResultMap"
+		parameterType="string">
+		select *
+		from refrigerator join goods on refrigerator.gCode = goods.gCode
+		where userid = #{userid}
+		order by num
+	</select>
+
+	<delete id="refrigeratorDelete" parameterType="int">
+		delete from refrigerator
+		where num = #{num}
+	</delete>
+
 </mapper>

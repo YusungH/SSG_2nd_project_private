@@ -1,1 +1,1 @@
-# SSG_2ndProject
+# 개인작업용

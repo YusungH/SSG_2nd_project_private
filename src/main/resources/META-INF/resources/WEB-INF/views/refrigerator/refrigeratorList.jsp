@@ -121,7 +121,7 @@
 <form>
    <div class="container">
       <div class="TodoApp">
-         <p class="text-center">${ error }<br>추가할 새로운 상품과 수량을 선택하세요.</p>
+         <p class="text-center"><br>${ goodsList }</p>
          <table class="table align-middle text-center">
             <thead>
                <tr>
@@ -148,24 +148,9 @@
                   </td>
                   <td>
                      <select name="itemName" id="add_gCode" size="7">
-                           <option value="DA-0001">슬라이스 치즈</option>
-                           <option value="DA-0002">달걀</option>
-                           <option value="FR-0001">귤</option>
-                           <option value="FR-0002">토마토</option>
-                           <option value="FS-0001">고등어</option>
-                           <option value="FS-0002">낙지</option>
-                           <option value="FZ-0001">군만두</option>
-                           <option value="FZ-0002">감자튀김</option>
-                           <option value="MT-0001">닭가슴살</option>
-                           <option value="MT-0002">돼지고기 앞다리살</option>
-                           <option value="SC-0001">굴소스</option>
-                           <option value="SC-0002">다진마늘</option>
-                           <option value="SI-0001">김치</option>
-                           <option value="SI-0002">찜닭</option>
-                           <option value="SN-0001">크림빵</option>
-                           <option value="SN-0002">감자칩</option>
-                           <option value="VG-0001">양배추</option>
-                           <option value="VG-0002">콩나물</option>
+                     <c:forEach var="goods" items="${ refGoodsList }">
+                     	<option value=${ goods.gCode }>${ goods.gName }</option>
+                     </c:forEach>
                      </select>
                      <input type="hidden" value="" name="gName" id="add_gName">
                   </td>

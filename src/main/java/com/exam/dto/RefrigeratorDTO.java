@@ -4,6 +4,7 @@ import java.util.List;
 
 public class RefrigeratorDTO {
 	
+	int num;
 	String userid;
 	String gCode ;
 	String gCategory;
@@ -14,14 +15,23 @@ public class RefrigeratorDTO {
 
 	public RefrigeratorDTO() {}
 
-	public RefrigeratorDTO(String userid, String gCode, String gCategory, String gName, int rStock,
+	public RefrigeratorDTO(int num, String userid, String gCode, String gCategory, String gName, int rStock,
 			List<GoodsDTO> goodsList) {
+		this.num = num;
 		this.userid = userid;
 		this.gCode = gCode;
 		this.gCategory = gCategory;
 		this.gName = gName;
 		this.rStock = rStock;
 		this.goodsList = goodsList;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	public String getUserid() {
@@ -74,10 +84,10 @@ public class RefrigeratorDTO {
 
 	@Override
 	public String toString() {
-		return "RefrigeratorDTO [userid=" + userid + ", gCode=" + gCode + ", gCategory=" + gCategory + ", gName="
-				+ gName + ", rStock=" + rStock + ", goodsList=" + goodsList + "]";
+		return "RefrigeratorDTO [num=" + num + ", userid=" + userid + ", gCode=" + gCode + ", gCategory=" + gCategory
+				+ ", gName=" + gName + ", rStock=" + rStock + ", goodsList=" + goodsList + "]";
 	}
-	
+
 	
 }
 	

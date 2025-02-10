@@ -11,7 +11,7 @@
     </select>
     
     <!-- 여기 수정 -->
-    <update id="updateRefrigeratorStock">
+    <update id="updateRefrigeratorStock" parameterType="hashmap">
 		update refrigerator
 		set rStock = CASE
 			WHEN rStock + #{amount} >= 0 THEN rStock + #{amount}

@@ -50,14 +50,6 @@
          $("#viewCategory2").val(categoryEngName);
          
       });
-
-      // 변경 사항 저장
-//       $("save").on("click", function() {
-//         var f = $("form")[0];
-//         f.action = "save";
-//         f.method = "get";
-//         f.submit();
-//      });
       
       // 내 냉장고에 상품 추가하기
       $("#addRef").on("click", function(){
@@ -71,9 +63,9 @@
       $(".btn-success").on("click", function(){
          event.preventDefault();
          var row = $(this).closest("tr");
-         var gCode = row.find("img#gCode").attr("src").split("/").pop();
+         var num = row.find("input#hidden_num").val();
          var amount = row.find("input#amount").val();
-         var queryString = "gCode=" + gCode + "&amount=" + amount;
+         var queryString = "num=" + num + "&amount=" + amount;
          var url = "updateRefrigeratorStock?" + queryString;
          location.href = url;
       });
@@ -97,7 +89,7 @@
                <tbody>
                   <c:forEach var="item" items="${ refrigeratorList }">
                   <tr>
-                     <td>${ item.num }</td>
+                     <td>${ item.num }<input type="hidden" name="hidden_num" id="hidden_num" value="${ item.num }"></td>
                      <td><img src="images/items/${ item.gCode }.png" width="160" height="160" id="gCode"><br>${ item.gName }</td>
                      <td><input type="number" name="stock" id="amount" value="${ item.rStock }" style="text-align: right;" size="3" min="0" max="99"> <br><br>
                      </td>
@@ -143,13 +135,15 @@
                      <input type="text" name="viewCategory" id="viewCategory" value="" size="12">
                      <input type="hidden" name="gCategory" id="viewCategory2" value="" size="12">
                   </td>
-                  <td><img src="images/items/DA-0001.png" width="100" height="100"
+                  <td><img src="images/items/white.png" width="100" height="100"
                      id="addItemImage" alt="상품 이미지">
                   </td>
                   <td>
-                     <select name="itemName" id="add_gCode" size="7">
+                     <select name="itemName" id="add_gCode">
+                     <option>추가할 상품을 선택하세요.</option>
                      <c:forEach var="goods" items="${ refGoodsList }">
                      	<option value=${ goods.gCode }>${ goods.gName }</option>
+                     	
                      </c:forEach>
                      </select>
                      <input type="hidden" value="" name="gName" id="add_gName">

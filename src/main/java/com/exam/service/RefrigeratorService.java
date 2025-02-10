@@ -11,6 +11,6 @@ public interface RefrigeratorService {
 	public List<RefrigeratorDTO> refrigeratorList(String userid);
 	public int refrigeratorDelete(int num);
 	public int getRefrigeratorStock(String userid, String gCode);
-	public int updateRefrigeratorStock(Map<String, String> map);
+	public int updateRefrigeratorStock(RefrigeratorDTO dto);
 
 }

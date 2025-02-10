@@ -11,18 +11,15 @@
     </select>
     
     <!-- 여기 수정 -->
-    <update id="updateRefrigeratorStock" parameterType="hashmap">
+    <update id="updateRefrigeratorStock" parameterType="RefrigeratorDTO">
 		update refrigerator
-		set rStock = CASE
-			WHEN rStock + #{amount} >= 0 THEN rStock + #{amount}
-			ELSE rStock
-			END
-		where userid = #{userid} AND gCode = #{gCode}
+		set rStock = #{rStock}
+		where userid = #{userid} AND num = #{num}
     </update>
     
     <insert id="refrigeratorAdd" parameterType="RefrigeratorDTO">
-      insert into refrigerator (gCode, gCategory, gName, rStock)
-      values ( #{gCode}, #{gCategory}, #{gName}, #{rStock})
+      insert into refrigerator (userid, gCode, gCategory, gName, rStock)
+      values (#{userid}, #{gCode}, #{gCategory}, #{gName}, #{rStock})
     </insert>
     
     <resultMap id="refrigeratorResultMap" type="RefrigeratorDTO">

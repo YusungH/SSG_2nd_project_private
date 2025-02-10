@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.exam.dto.GoodsDTO;
 import com.exam.dto.MemberDTO;
@@ -25,7 +24,6 @@ import jakarta.validation.constraints.Size;
 
 @Controller
 @Validated
-@SessionAttributes(value={"refrigeratorList","refGoodsList"})
 public class RefrigeratorController {
     
 	private Logger logger = LoggerFactory.getLogger(getClass());
@@ -37,7 +35,6 @@ public class RefrigeratorController {
 		this.refrigeratorService = refrigeratorService;
 		this.goodsService = goodsService;
 	}
-    
     
     // 전체 냉장고 목록 보기
     @GetMapping("/refrigerator")
@@ -90,7 +87,7 @@ public class RefrigeratorController {
        
        int n = refrigeratorService.refrigeratorDelete(num);
        
-       return "redirect:refrigeratorList";
+       return "redirect:refrigerator";
     }
     
     // 식재료 보유 현황 조회
@@ -107,22 +104,24 @@ public class RefrigeratorController {
         return "/refrigerator";
     }
     
-    // 식재료 보유 현황 업데이트
+    // 식재료 수량 변경
     @GetMapping("updateRefrigeratorStock")
-    public String updateRefrigeratorStock(@RequestParam String gCode,
-                                 @RequestParam String amount) {
+    public String updateRefrigeratorStock(@RequestParam int num,
+                                 @RequestParam int amount) {
        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
        MemberDTO memberDTO = (MemberDTO)auth.getPrincipal();
        
        String userid = memberDTO.getUserid();
        
-       Map<String, String> map = new HashMap<>();
-       map.put("gCode", gCode);
-       map.put("amount", amount);
+       RefrigeratorDTO refrigeratorDTO = new RefrigeratorDTO();
+       refrigeratorDTO.setUserid(userid);
+       refrigeratorDTO.setrStock(amount);
+       refrigeratorDTO.setNum(num);
        
-       int n = refrigeratorService.updateRefrigeratorStock(map);
        
-       return "redirect:refrigerator";
+       int n = refrigeratorService.updateRefrigeratorStock(refrigeratorDTO);
+       
+       return "refrigerator/refrigeratorUpdateSuccess";
        
     }
 

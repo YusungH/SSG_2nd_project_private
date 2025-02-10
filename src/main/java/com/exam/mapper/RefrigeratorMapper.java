@@ -18,5 +18,5 @@ public interface RefrigeratorMapper {
 
 	public int getRefrigeratorStock(String userid, String gCode);
 
-	public int updateRefrigeratorStock(Map<String, String> map);
+	public int updateRefrigeratorStock(RefrigeratorDTO dto);
 }

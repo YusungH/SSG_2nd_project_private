@@ -41,8 +41,8 @@ public class RefrigeratorServiceImpl implements RefrigeratorService {
 
    @Override
    @Transactional
-   public int updateRefrigeratorStock(Map<String, String> map) {
-      return mapper.updateRefrigeratorStock(map);
+   public int updateRefrigeratorStock(RefrigeratorDTO dto) {
+      return mapper.updateRefrigeratorStock(dto);
    }
 
 }

@@ -88,6 +88,17 @@ public class RefrigeratorController {
 		return "redirect:refrigerator";
 	}
 
+	// 냉장고 상품 전체 삭제
+	   @GetMapping("/refrigeratorDeleteAll")
+	   public String refrigeratorDeleteAll(@RequestParam(name = "check", required = false) List<String> check) {
+	      
+	      System.out.println("check: " + check);
+	      if(check != null) {
+	         int n = refrigeratorService.refrigeratorDeleteAll(check);
+	      }
+	      return "redirect:refrigerator";
+	   }
+	
 	// 식재료 보유 현황 조회
 	@GetMapping("getRefrigeratorStock")
 	public String getRefrigeratorStock(@RequestParam String gCode, Model m) {

@@ -7,7 +7,7 @@
 	  // 로그인 처리
 	  $("form").on("submit", function(){
 		  this.action="auth";   //LoginServlet
-		  this.method="post"         // doPost
+		  this.method="post";         // doPost
 	  });
   });//end ready
 </script>

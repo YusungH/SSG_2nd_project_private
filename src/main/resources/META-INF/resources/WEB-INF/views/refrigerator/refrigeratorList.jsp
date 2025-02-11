@@ -68,6 +68,24 @@
 			var url = "updateRefrigeratorStock?" + queryString;
 			location.href = url;
 		});
+		
+		// 전체 삭제 버튼 클릭 시 확인 후 삭제
+		${"#deleteAll"}.on("click", funtion(){
+			if(confirm("모든 항목을 삭제하시겠습니까?")){
+				$.ajax({
+					type: "POST",
+					url: "refrigeratorDeleteAll",
+					sucess: function(response){
+						location.reload();
+					},
+					error: function(){
+						alert("삭제에 실패하였습니다. 다시 시도해주세요")
+					}
+				});
+			}
+		});
+		
+		
 	});//end ready
 	
 </script>
@@ -102,6 +120,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
+			
 			</div>
 		</div>
 	</div>

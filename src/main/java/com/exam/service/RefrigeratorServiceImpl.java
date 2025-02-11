@@ -35,14 +35,14 @@ public class RefrigeratorServiceImpl implements RefrigeratorService {
    }
 
    @Override
-   public int getRefrigeratorStock(String userid, String gCode) {
-      return mapper.getRefrigeratorStock(userid, gCode);
-   }
-
-   @Override
    @Transactional
    public int updateRefrigeratorStock(RefrigeratorDTO dto) {
       return mapper.updateRefrigeratorStock(dto);
    }
+
+   @Override
+   public int refrigeratorDeleteAll(List<String> list) {
+	   return mapper.refrigeratorDeleteAll(list);
+}
 
 }

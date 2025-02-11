@@ -4,11 +4,6 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.exam.mapper.RefrigeratorMapper">
 
-	<select id="getRefrigeratorStock" resultType="int">
-		select rStock from refrigerator
-		where userid = #{userid} AND gCode = #{gCode}
-	</select>
-
 	<update id="updateRefrigeratorStock" parameterType="RefrigeratorDTO">
 		update refrigerator
 		set rStock = #{rStock}
@@ -50,6 +45,16 @@
 	<delete id="refrigeratorDelete" parameterType="int">
 		delete from refrigerator
 		where num = #{num}
+	</delete>
+	
+	<delete id="refrigeratorDeleteAll" parameterType="arraylist">
+		delete from refrigerator
+		<where>
+			num IN
+			<foreach item="item" collection="list" separator="," open="(" close=")">
+				#{item}
+			</foreach>
+		</where>
 	</delete>
 
 </mapper>

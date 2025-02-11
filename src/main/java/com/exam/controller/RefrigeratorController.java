@@ -96,6 +96,7 @@ public class RefrigeratorController {
 	      if(check != null) {
 	         int n = refrigeratorService.refrigeratorDeleteAll(check);
 	      }
+	      
 	      return "redirect:refrigerator";
 	   }
 	
